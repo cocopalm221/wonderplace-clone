@@ -79,7 +79,7 @@ body::-webkit-scrollbar-track {
   padding: 0 8.33%;
   padding-top: 60px;
   transition: padding-top 0.3s;
-  background-color: pink;
+  background-color: #fff;
 }
 .header .inner.active {
   padding-top: 40px;
@@ -187,11 +187,11 @@ body::-webkit-scrollbar-track {
 .nav-mb.active i::before {
   left: 3px !important;
   top: 3px !important;
-  transform: rotate(45deg);
+  transform: rotate(45deg) !important;
 }
 .nav-mb.active i::after {
   right: -3px !important;
-  top: calc((100% - 2px)) !important;
+  top: calc(100% - 2px) !important;
   width: 100% !important;
   transform: rotate(-45deg) !important;
 }
@@ -298,6 +298,7 @@ body::-webkit-scrollbar-track {
   height: 30px;
   border-radius: 50%;
   font-size: 0;
+
   transition: background 0.3s;
   overflow: hidden;
 }
@@ -385,25 +386,26 @@ body::-webkit-scrollbar-track {
 .visual .inner {
   display: flex;
   justify-content: flex-start;
-  padding-top: 100px;
+  padding-top: 220px;
   z-index: 9;
+  width: 83.3333%;
+  max-width: 1920px;
 }
 .sw-visual-control {
-  margin-right: 260px;
+  margin-right: 17%;
 }
+
 .sw-visual-control li {
   position: relative;
   display: block;
   padding: 12px 0;
   padding-left: 30px;
+  cursor: pointer;
+
   font-size: 18px;
   font-weight: 300;
   color: #131313;
   letter-spacing: 1px;
-  cursor: pointer;
-}
-.sw-visual-control li.active {
-  font-weight: 700;
 }
 .sw-visual-control li::before {
   content: "";
@@ -412,29 +414,20 @@ body::-webkit-scrollbar-track {
   top: 50%;
   width: 10px;
   height: 3px;
-  background-color: #999;
+  background: #999;
   transition: all 0.3s;
+}
+.sw-visual-control li.active {
+  font-weight: 700;
 }
 .sw-visual-control li.active::before {
   width: 20px;
-  background-color: #000;
+  background: #000;
 }
+
 .visual-wrap {
   position: relative;
-}
-.visual-wrap p {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 66px);
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  word-wrap: normal;
-  word-break: keep-all;
-}
-.visual-wrap p b {
-  display: block;
-  font-weight: 700;
+  width: 70%;
 }
 .visual-wrap h2 {
   font-size: 80px;
@@ -443,6 +436,8 @@ body::-webkit-scrollbar-track {
   line-height: 100px;
   letter-spacing: -3px;
   margin-bottom: 60px;
+
+  white-space: nowrap;
 }
 .visual-wrap h3 {
   font-size: 80px;
@@ -450,6 +445,7 @@ body::-webkit-scrollbar-track {
   color: #131313;
   letter-spacing: -3px;
 }
+
 .sw-visual-nav {
   position: absolute;
   right: 0;
@@ -459,21 +455,18 @@ body::-webkit-scrollbar-track {
 .sw-visual-prev {
   position: relative;
   border: 0;
-  background-color: #131313;
+  background: #131313;
   width: 80px;
   height: 80px;
-  font-size: 0;
   cursor: pointer;
 }
 .sw-visual-prev::before {
   content: "";
   display: inline-block;
-  vertical-align: middle;
   position: absolute;
   left: calc(50% + 6px);
   top: 50%;
   transform: translate(-50%, -50%) rotate(-135deg);
-  box-sizing: border-box;
   width: 24px;
   height: 24px;
   border-top: #fff solid 2px;
@@ -482,27 +475,27 @@ body::-webkit-scrollbar-track {
   opacity: 1;
   transition: 0.2s;
 }
+
 .sw-visual-prev:hover::before {
-  opacity: 0.7;
+  opacity: 0.8;
 }
+
 .sw-visual-next {
   position: relative;
   border: 0;
-  background-color: #131313;
+  background: #131313;
   width: 80px;
   height: 80px;
-  font-size: 0;
   cursor: pointer;
 }
+
 .sw-visual-next::before {
   content: "";
   display: inline-block;
-  vertical-align: middle;
   position: absolute;
   left: calc(50% - 6px);
   top: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-  box-sizing: border-box;
   width: 24px;
   height: 24px;
   border-top: #fff solid 2px;
@@ -512,13 +505,35 @@ body::-webkit-scrollbar-track {
   transition: 0.2s;
 }
 .sw-visual-next:hover::before {
-  opacity: 0.7;
+  opacity: 0.8;
 }
+
+.visual-wrap p {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 66px);
+
+  width: 45%;
+
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+  word-wrap: normal;
+  word-break: keep-all;
+}
+.visual-wrap p b {
+  font-weight: 700;
+  display: block;
+
+  margin-bottom: 20px;
+}
+/* 비주얼 Swiper */
 .swVisual-wrap {
   position: relative;
   display: block;
   margin-top: -40px;
 }
+
 .swVisual {
   width: 100%;
   height: 480px;
@@ -541,6 +556,101 @@ body::-webkit-scrollbar-track {
   background: url("../images/bg03.jpg") no-repeat center;
   background-size: cover;
 }
+
+@media screen and (max-width: 1440px) {
+  .sw-visual-control {
+    margin-right: 14%;
+  }
+  .swVisual {
+    height: 720px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .visual-wrap h2 {
+    font-size: 55px;
+    line-height: 65px;
+    margin-bottom: 10px;
+  }
+  .visual-wrap h3 {
+    font-size: 55px;
+    font-weight: 800;
+  }
+  .visual-wrap p {
+    position: relative;
+    width: 100%;
+    left: auto;
+    top: auto;
+    margin-top: 50px;
+  }
+  .swVisual-wrap {
+    /* margin-top: 30px; */
+  }
+  .sw-visual-nav {
+    position: relative;
+    float: right;
+    right: auto;
+    bottom: auto;
+  }
+  .swVisual {
+    height: 720px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .visual .inner {
+    padding-top: 190px;
+  }
+  .visual-wrap p {
+    font-size: 15px;
+    line-height: 25px;
+    margin-top: 20px;
+  }
+  .swVisual {
+    height: 576px;
+  }
+}
+@media screen and (max-width: 760px) {
+  .visual .inner {
+    padding-top: 170px;
+  }
+  .sw-visual-control {
+    margin-right: 10%;
+  }
+  .visual-wrap h2 {
+    font-size: 40px;
+    line-height: 50px;
+  }
+  .visual-wrap h3 {
+    font-size: 40px;
+  }
+  .visual-wrap p {
+    font-size: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .visual-wrap p b {
+    font-size: 15px;
+  }
+  .sw-visual-nav {
+    display: none;
+  }
+  .swVisual {
+    height: 400px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .visual .inner {
+    padding-top: 140px;
+  }
+  .visual-wrap h2 {
+    font-size: 35px;
+    line-height: 40px;
+  }
+  .visual-wrap h3 {
+    font-size: 35px;
+  }
+}
+
 /* 소개 */
 .about {
   position: relative;
