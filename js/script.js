@@ -1,5 +1,26 @@
 window.onload = function () {
-  // aos셋팅
+  // 위로 가기
+  const goTopBt = document.querySelector(".gotop");
+  goTopBt.addEventListener("click", function () {
+    // 구글검색 추천
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+  // 스크롤시에 부드럽게 goTop 보이고/숨기기
+  window.addEventListener("scroll", function () {
+    // 1. 스크롤바의 위치 값
+    const scY = window.scrollY;
+    // 2. 스크로바가 80픽셀 읻오시
+    if (scY > 80) {
+      goTopBt.classList.add("active");
+    } else {
+      goTopBt.classList.remove("active");
+    }
+  });
+
+  // AOS 셋팅
   AOS.init();
 
   // 모바일 메뉴 관련
@@ -92,7 +113,59 @@ window.onload = function () {
   }
 
   // brandSlide
-  const swBrand = new Swiper(".swBrand");
+  let swBrandBts = document.querySelectorAll(".swBrandMenu > li");
+  const swBrand = new Swiper(".swBrand", {
+    pagination: {
+      el: ".swBrand-pg ",
+      clickable: true,
+    },
+    effect: "fade",
+    speed: 1000,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+  });
+
+  swBrand.on("slideChangeTransitionStart", function () {
+    // console.log("slide changed", this.realIndex);
+    changeSwBrandFocus(this.realIndex);
+  });
+
+  swBrandBts.forEach((item, index) => {
+    item.addEventListener("click", function (e) {
+      // href 막기
+      e.preventDefault();
+      // 인덱스 번호를 넘겨서 슬라이드를 이동한다.
+      changeSwBrand(index);
+    });
+  });
+
+  function changeSwBrand(index) {
+    // 슬라이드 이동
+    swBrand.slideTo(index);
+    changeSwBrandFocus(index);
+  }
+
+  // active 클래스 이동
+  function changeSwBrandFocus(index) {
+    // li 태그에서 active 클래스 모두 지우기
+    swBrandBts.forEach((item) => {
+      item.classList.remove("active");
+    });
+    // 하나만 포커스(active) 클래스 적용
+    swBrandBts[index].classList.add("active");
+  }
+
+  // 자동 플레이 막기/재실행
+  const swBrandWrap = document.querySelector(".swBrandWrap");
+
+  swBrandWrap.addEventListener("mouseenter", function () {
+    swBrand.autoplay.stop();
+  });
+  swBrandWrap.addEventListener("mouseleave", function () {
+    swBrand.autoplay.start();
+  });
 
   // Visual Swiper 스케일 효과
   // 참조 https://bkstudio.tistory.com/6
@@ -106,7 +179,7 @@ window.onload = function () {
   let swVisualWrap = document.querySelector(".swVisual-wrap");
 
   /* effectText 인터렉션 */
-  let stX = 50; //50%를 기준으로 한다(translate)
+  let stX = 50; // 50% 를 기준으로 한다. (translate)
   let effect_01 = document.querySelector(".effect-01");
   let effect_02 = document.querySelector(".effect-02");
 
@@ -134,10 +207,11 @@ window.onload = function () {
 
   function effectText() {
     let value02 = stX * 2;
+    //https://developer.mozilla.org/ko/docs/Web/API/Element/getBoundingClientRect
     let rect =
       document.querySelector(".effect").getBoundingClientRect().top +
       window.scrollY;
-    // windhight: 웹브라우저 내용(상단 웹브라우저 메뉴 제거한 높이)
+    // windHeight: 웹브라우저 내용(상단 웹브라우저 메뉴 제거한 높이)
     let offset = rect - winHeight;
 
     let calvalue = scTop - offset;
